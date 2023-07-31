@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 import sys
 
 def init_params():
-    W1 = np.random.rand(10, 30)
-    b1 = np.random.rand(10, 1)
-    W2 = np.random.rand(10, 10)
-    b2 = np.random.rand(10, 1)
-    W3 = np.random.rand(2, 10)
-    b3 = np.random.rand(2, 1)
+    W1 = 0.01 * np.random.rand(10, 30)
+    b1 = 0.01 * np.random.rand(10, 1)
+    W2 = 0.01 * np.random.rand(10, 10)
+    b2 = 0.01 * np.random.rand(10, 1)
+    W3 = 0.01 * np.random.rand(2, 10)
+    b3 = 0.01 * np.random.rand(2, 1)
     return W1, b1, W2, b2, W3, b3
 
 
@@ -46,7 +46,7 @@ def one_hot_encoder(Y):
 
 
 def deriv_ReLU(Z):
-    return Z > 0
+    return (Z > 0).astype(np.float64)
 
 
 def back_prop(A1, Z1, A2, Z2, W2, A3, W3, X, Y):
@@ -131,8 +131,8 @@ def main():
             X_train_scaled = scaling(X_train)
             print(X_train_scaled.shape)
 
-            W1, b1, W2, b2, W3, b3 = gradient_descent(X_train_scaled, Y_train, 200, 0.01)
-            print("sdkvhdvks: ", W1, b1, W2, b2, W3, b3)
+            W1, b1, W2, b2, W3, b3 = gradient_descent(X_train_scaled, Y_train, 200, 0.000001)
+            # print("sdkvhdvks: ", W1, b1, W2, b2, W3, b3)
 
         except FileNotFoundError:
             print(sys.argv[1] + " not found.")
